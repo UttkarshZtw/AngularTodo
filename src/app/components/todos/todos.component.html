@@ -1,0 +1,27 @@
+<div class="todos">
+    <form class="todoForm" (submit)="addTodo()">
+        <input type="text"
+            name="inputTodo"
+            placeholder="Enter the todo..."
+            class="todo-input"
+            [(ngModel)] ="inputTodo"
+            autocomplete="false"
+            
+        />
+        <input type="submit" value="+" class="button"/>
+    </form>
+    <p class="noTodos" *ngIf="emptyTodos; else notEmptyTodos">
+        You have no todos 🍾
+    </p>
+    <ng-template #notEmptyTodos>
+        <div *ngFor="let todo of todos; let i = index" 
+            class="todo">
+            <div class="id">{{i+1}}.</div>
+            <div class="content {{(todo.compleated ? 'done' : '')}}" (click)="toggleDone(i)">
+                {{todo.content}}
+            </div>
+            <button class="button" (click)="updateTodo(i)">Update</button>
+            <button class="button" (click)="deleteTodo(i)">Remove</button>
+        </div>
+    </ng-template>
+</div>
